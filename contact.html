@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>King Force</title>
+    <link rel="stylesheet" href="src/css/output.css" />
+    <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@latest/dist/css/phosphor.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+
+<body>
+
+
+
+    <header
+        class="w-full bg-white/80 backdrop-blur-md px-6 md:px-12 sticky top-0 z-50 shadow-sm h-24 flex items-center font-['Montserrat']"
+        x-data="{ mobileMenuOpen: false }">
+        <div class="max-w-[1440px] mx-auto w-full flex items-center justify-between">
+
+            <div class="w-1/3 md:w-1/4 flex justify-start items-center">
+                <a href="index.html" class="block">
+                    <img src="src/assets/images/logo.png" alt="Logo"
+                        class="h-16 md:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105">
+                </a>
+            </div>
+
+            <nav class="hidden lg:flex flex-1 justify-center items-center space-x-8 lg:space-x-10">
+                <a href="index.html" class="group relative py-1 text-[#3277BC] text-lg font-bold whitespace-nowrap">
+                    <span>Accueil</span>
+                    <span
+                        class="absolute bottom-0 left-0 w-full h-0.5 bg-[#3277BC] origin-left transition-transform duration-300"></span>
+                </a>
+                <a href="a-propos.html"
+                    class="group relative py-1 text-gray-600 hover:text-[#3277BC] text-lg font-bold transition-colors">
+                    <span>À propos</span>
+                    <span
+                        class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#3277BC] transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="tourisme.html"
+                    class="nav-active group relative py-1 text-gray-600 hover:text-[#3277BC] text-lg font-bold transition-colors">
+                    <span>Tourisme</span>
+                    <span
+                        class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#3277BC] transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="nos-actions.html"
+                    class="group relative py-1 text-gray-600 hover:text-[#3277BC] text-lg font-bold transition-colors">
+                    <span>Nos actions</span>
+                    <span
+                        class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#3277BC] transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </nav>
+
+            <div class="hidden sm:flex w-1/3 md:w-1/4 justify-end items-center">
+                <a href="contact.html"
+                    class="bg-[#67B32C] text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-[#58a125] hover:-translate-y-1 transition-all duration-300">
+                    Contact
+                </a>
+            </div>
+
+            <div class="lg:hidden flex items-center">
+                <button @click="mobileMenuOpen = true" class="text-[#3277BC] p-2 focus:outline-none">
+                    <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                            d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <template x-teleport="body">
+            <div x-show="mobileMenuOpen" class="fixed inset-0 z-[100] lg:hidden" x-ref="dialog" aria-modal="true">
+
+                <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                    x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0" @click="mobileMenuOpen = false"
+                    class="fixed inset-0 bg-gray-900/60 backdrop-blur-sm"></div>
+
+                <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-300 transform"
+                    x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
+                    x-transition:leave="transition ease-in duration-200 transform"
+                    x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full"
+                    class="fixed inset-y-0 right-0 w-full max-w-xs bg-white shadow-2xl p-8 flex flex-col">
+
+                    <div class="flex items-center justify-between mb-12">
+                        <img src="src/assets/images/logo.png" class="h-12 w-auto" alt="Logo">
+                        <button @click="mobileMenuOpen = false"
+                            class="text-gray-500 hover:text-red-500 transition-colors">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                   <nav class="flex flex-col space-y-6" x-data="{ currentPath: window.location.pathname }">
+    <a href="index.html" 
+       class="text-2xl pb-2 transition-all duration-300"
+       :class="currentPath.includes('index.html') || currentPath === '/' ? 'font-black text-[#3277BC] border-b-2 border-[#3277BC]' : 'font-bold text-gray-700 hover:text-[#3277BC]'">
+       Accueil
+    </a>
+
+    <a href="a-propos.html" 
+       class="text-2xl pb-2 transition-all duration-300"
+       :class="currentPath.includes('a-propos.html') ? 'font-black text-[#3277BC] border-b-2 border-[#3277BC]' : 'font-bold text-gray-700 hover:text-[#3277BC]'">
+       À propos
+    </a>
+
+    <a href="tourisme.html" 
+       class="text-2xl pb-2 transition-all duration-300"
+       :class="currentPath.includes('tourisme.html') ? 'font-black text-[#3277BC] border-b-2 border-[#3277BC]' : 'font-bold text-gray-700 hover:text-[#3277BC]'">
+       Tourisme
+    </a>
+
+    <a href="nos-actions.html" 
+       class="text-2xl pb-2 transition-all duration-300"
+       :class="currentPath.includes('nos-actions.html') ? 'font-black text-[#3277BC] border-b-2 border-[#3277BC]' : 'font-bold text-gray-700 hover:text-[#3277BC]'">
+       Nos actions
+    </a>
+</nav>
+
+                    <div class="mt-auto">
+                        <a href="contact.html" @click="mobileMenuOpen = false"
+                            class="block w-full text-center bg-[#67B32C] text-white py-5 rounded-2xl font-black text-xl shadow-lg">
+                            Nous contacter
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </header>
+
+
+    <section class="py-24 bg-[#F8FAFC] font-['Montserrat'] overflow-hidden" x-data="{ visible: false }"
+        x-init="setTimeout(() => visible = true, 200)">
+
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="bg-white rounded-[60px] overflow-hidden flex flex-col md:flex-row shadow-[0_40px_100px_-20px_rgba(50,119,188,0.15)] border border-white transition-all duration-1000 transform"
+                :class="visible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'">
+
+                <div
+                    class="md:w-5/12 bg-gradient-to-br from-white to-blue-50/50 p-12 md:p-20 flex flex-col justify-center relative">
+                    <div class="absolute -top-10 -left-10 w-40 h-40 bg-[#3277BC]/5 rounded-full blur-3xl"></div>
+                    <div class="absolute bottom-20 right-0 w-24 h-24 bg-[#67B32C]/5 rounded-full blur-2xl"></div>
+
+                    <div class="relative z-10">
+                        <span
+                            class="text-[#67B32C] font-black uppercase tracking-[0.3em] text-xs mb-4 block">Contactez-nous</span>
+                        <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-8 leading-tight">Parlons de votre
+                            projet.</h2>
+
+                        <div class="space-y-10">
+                            <div class="flex items-center gap-6 group">
+                                <div
+                                    class="w-16 h-16 bg-white rounded-2xl shadow-xl shadow-blue-900/5 flex items-center justify-center text-[#3277BC] group-hover:scale-110 group-hover:bg-[#3277BC] group-hover:text-white transition-all duration-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-[#768385] font-black uppercase tracking-widest mb-1">
+                                        Notre Siège</p>
+                                    <p class="text-lg text-gray-800 font-bold">Bopa, Bénin</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-6 group">
+                                <div
+                                    class="w-16 h-16 bg-white rounded-2xl shadow-xl shadow-blue-900/5 flex items-center justify-center text-[#3277BC] group-hover:scale-110 group-hover:bg-[#3277BC] group-hover:text-white transition-all duration-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M3 5a2 2 0 012-2h2.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-[#768385] font-black uppercase tracking-widest mb-1">
+                                        Appel Direct</p>
+                                    <p class="text-lg text-gray-800 font-bold">+229 XX XX XX XX</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="md:w-7/12 bg-[#3277BC] p-10 md:p-20 relative overflow-hidden">
+                    <div
+                        class="absolute -top-20 -right-20 w-96 h-96 bg-white/10 rounded-full blur-[100px] animate-pulse">
+                    </div>
+                    <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-[#67B32C]/20 rounded-full blur-[80px]"></div>
+
+                    <div class="relative z-10">
+                        <form action="#" class="space-y-7">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-7">
+                                <div class="space-y-2">
+                                    <label
+                                        class="text-white/70 text-[10px] font-bold uppercase tracking-widest ml-4">Votre
+                                        Nom</label>
+                                    <input type="text" placeholder="Doe"
+                                        class="w-full p-5 bg-white/5 border border-white/10 rounded-[25px] text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-[#67B32C] focus:bg-white/10 transition-all backdrop-blur-md shadow-inner">
+                                </div>
+                                <div class="space-y-2">
+                                    <label
+                                        class="text-white/70 text-[10px] font-bold uppercase tracking-widest ml-4">Votre
+                                        Prénom</label>
+                                    <input type="text" placeholder="John"
+                                        class="w-full p-5 bg-white/5 border border-white/10 rounded-[25px] text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-[#67B32C] focus:bg-white/10 transition-all backdrop-blur-md shadow-inner">
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="text-white/70 text-[10px] font-bold uppercase tracking-widest ml-4">Email
+                                    Professionnel</label>
+                                <input type="email" placeholder="john@company.com"
+                                    class="w-full p-5 bg-white/5 border border-white/10 rounded-[25px] text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-[#67B32C] focus:bg-white/10 transition-all backdrop-blur-md">
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-7">
+                                <div class="space-y-2">
+                                    <label
+                                        class="text-white/70 text-[10px] font-bold uppercase tracking-widest ml-4">Téléphone</label>
+                                    <input type="tel" placeholder="+229 ..."
+                                        class="w-full p-5 bg-white/5 border border-white/10 rounded-[25px] text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-[#67B32C] focus:bg-white/10 transition-all backdrop-blur-md">
+                                </div>
+                                <div class="space-y-2">
+                                    <label
+                                        class="text-white/70 text-[10px] font-bold uppercase tracking-widest ml-4">Sujet</label>
+                                    <input type="text" placeholder="Devis / Partenariat"
+                                        class="w-full p-5 bg-white/5 border border-white/10 rounded-[25px] text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-[#67B32C] focus:bg-white/10 transition-all backdrop-blur-md">
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="text-white/70 text-[10px] font-bold uppercase tracking-widest ml-4">Votre
+                                    Message</label>
+                                <textarea placeholder="Dites-nous tout..." rows="4"
+                                    class="w-full p-5 bg-white/5 border border-white/10 rounded-[25px] text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-[#67B32C] focus:bg-white/10 transition-all backdrop-blur-md resize-none"></textarea>
+                            </div>
+
+                            <div class="pt-6">
+                                <button type="submit"
+                                    class="group relative w-full md:w-auto overflow-hidden bg-[#67B32C] text-white px-12 py-5 rounded-full font-black text-sm uppercase tracking-[0.2em] shadow-[0_20px_40px_-10px_rgba(103,179,44,0.5)] hover:shadow-[0_25px_50px_-10px_rgba(103,179,44,0.6)] transition-all duration-500 hover:-translate-y-1 active:scale-95">
+                                    <span class="relative z-10">Envoyer le message</span>
+                                    <div
+                                        class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                                    </div>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#3277BC] text-white py-10">
+        <div class="max-w-[1440px] mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="space-y-4">
+                    <div class="bg-white p-2 rounded-xl inline-block shadow-lg animate-[fadeIn_0.8s_ease-out]">
+                        <img src="src/assets/images/logo.png" alt="Logo UNIR-FORMER-ELEVER"
+                            class="h-16 w-16 object-contain">
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-lg font-bold tracking-wider uppercase">UNIR-FORMER-ELEVER</h3>
+                        <p class="text-blue-100 leading-snug max-w-xs text-sm">
+                            Une autorité morale au service des communautés et de la dignité humaine.
+                        </p>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Liens rapides</h4>
+                    <ul class="space-y-2 text-base">
+                        <li><a href="index.html"
+                                class="hover:translate-x-2 inline-block transition-transform duration-300 text-blue-50 hover:text-white">Accueil</a>
+                        </li>
+                        <li><a href="a-propos.html"
+                                class="hover:translate-x-2 inline-block transition-transform duration-300 text-blue-50 hover:text-white">À
+                                propos</a></li>
+                        <li><a href="tourisme.html"
+                                class="hover:translate-x-2 inline-block transition-transform duration-300 text-blue-50 hover:text-white">Tourisme
+                                à Bopa</a></li>
+                        <li><a href="nos-actions.html"
+                                class="hover:translate-x-2 inline-block transition-transform duration-300 text-blue-50 hover:text-white">Nos
+                                actions</a></li>
+                        <li><a href="contact.html"
+                                class="hover:translate-x-2 inline-block transition-transform duration-300 text-blue-50 hover:text-white">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Confidentialité</h4>
+                    <ul class="space-y-2 text-base">
+                        <li><a href="#"
+                                class="hover:translate-x-2 inline-block transition-transform duration-300 text-blue-50 hover:text-white">Politique
+                                de confidentialité</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="text-xl font-bold mb-3">Contact</h4>
+                        <p class="text-blue-50 text-base">Bopa, Bénin</p>
+                    </div>
+
+                    <div class="pt-2">
+                        <a href="dons.html" class="group relative inline-block bg-[#67B32C] text-white text-lg font-bold py-3 px-6 
+                            rounded-tl-[30px] rounded-br-[30px] rounded-tr-[10px] rounded-bl-[10px]
+                            hover:bg-[#569625] transition-all duration-300 shadow-xl hover:-translate-y-1">
+                            <span class="relative z-10">Faire un don</span>
+                            <div
+                                class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-[inherit]">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-10 pt-6 border-t border-white/10 text-center text-blue-100/50 text-xs">
+                <p>&copy; 2026 UNIR-FORMER-ELEVER. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+</body>

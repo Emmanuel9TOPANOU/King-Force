@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>King Force</title>
+    <link rel="stylesheet" href="src/css/output.css" />
+    <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@latest/dist/css/phosphor.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+
+<body>
+
+
+
+    <header
+        class="w-full bg-white/80 backdrop-blur-md px-6 md:px-12 sticky top-0 z-50 shadow-sm h-24 flex items-center font-['Montserrat']"
+        x-data="{ mobileMenuOpen: false }">
+        <div class="max-w-[1440px] mx-auto w-full flex items-center justify-between">
+
+            <div class="w-1/3 md:w-1/4 flex justify-start items-center">
+                <a href="index.html" class="block">
+                    <img src="src/assets/images/logo.png" alt="Logo"
+                        class="h-16 md:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105">
+                </a>
+            </div>
+
+            <nav class="hidden lg:flex flex-1 justify-center items-center space-x-8 lg:space-x-10">
+                <a href="index.html" class="group relative py-1 text-[#3277BC] text-lg font-bold whitespace-nowrap">
+                    <span>Accueil</span>
+                    
+                </a>
+                <a href="a-propos.html"
+                    class="group relative py-1 text-gray-600 hover:text-[#3277BC] text-lg font-bold transition-colors">
+                    <span>À propos</span>
+                    <span
+                        class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#3277BC] transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="tourisme.html"
+                    class="nav-active group relative py-1 text-gray-600 hover:text-[#3277BC] text-lg font-bold transition-colors">
+                    <span>Tourisme</span>
+                    <span
+                        class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#3277BC] transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="nos-actions.html"
+                    class="group relative py-1 text-gray-600 hover:text-[#3277BC] text-lg font-bold transition-colors">
+                    <span>Nos actions</span>
+                    <span
+                        class="absolute bottom-0 left-0 w-0 h-0.5 bg-[#3277BC] transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </nav>
+
+            <div class="hidden sm:flex w-1/3 md:w-1/4 justify-end items-center">
+                <a href="contact.html"
+                    class="bg-[#67B32C] text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-[#58a125] hover:-translate-y-1 transition-all duration-300">
+                    Contact
+                </a>
+            </div>
+
+            <div class="lg:hidden flex items-center">
+                <button @click="mobileMenuOpen = true" class="text-[#3277BC] p-2 focus:outline-none">
+                    <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                            d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <template x-teleport="body">
+            <div x-show="mobileMenuOpen" class="fixed inset-0 z-[100] lg:hidden" x-ref="dialog" aria-modal="true">
+
+                <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                    x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
+                    x-transition:leave-end="opacity-0" @click="mobileMenuOpen = false"
+                    class="fixed inset-0 bg-gray-900/60 backdrop-blur-sm"></div>
+
+                <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-300 transform"
+                    x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
+                    x-transition:leave="transition ease-in duration-200 transform"
+                    x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full"
+                    class="fixed inset-y-0 right-0 w-full max-w-xs bg-white shadow-2xl p-8 flex flex-col">
+
+                    <div class="flex items-center justify-between mb-12">
+                        <img src="src/assets/images/logo.png" class="h-12 w-auto" alt="Logo">
+                        <button @click="mobileMenuOpen = false"
+                            class="text-gray-500 hover:text-red-500 transition-colors">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <nav class="flex flex-col space-y-6" x-data="{ currentPath: window.location.pathname }">
+                        <a href="index.html" class="text-2xl pb-2 transition-all duration-300"
+                            :class="currentPath.includes('index.html') || currentPath === '/' ? 'font-black text-[#3277BC] border-b-2 border-[#3277BC]' : 'font-bold text-gray-700 hover:text-[#3277BC]'">
+                            Accueil
+                        </a>
+
+                        <a href="a-propos.html" class="text-2xl pb-2 transition-all duration-300"
+                            :class="currentPath.includes('a-propos.html') ? 'font-black text-[#3277BC] border-b-2 border-[#3277BC]' : 'font-bold text-gray-700 hover:text-[#3277BC]'">
+                            À propos
+                        </a>
+
+                        <a href="tourisme.html" class="text-2xl pb-2 transition-all duration-300"
+                            :class="currentPath.includes('tourisme.html') ? 'font-black text-[#3277BC] border-b-2 border-[#3277BC]' : 'font-bold text-gray-700 hover:text-[#3277BC]'">
+                            Tourisme
+                        </a>
+
+                        <a href="nos-actions.html" class="text-2xl pb-2 transition-all duration-300"
+                            :class="currentPath.includes('nos-actions.html') ? 'font-black text-[#3277BC] border-b-2 border-[#3277BC]' : 'font-bold text-gray-700 hover:text-[#3277BC]'">
+                            Nos actions
+                        </a>
+                    </nav>
+                    <div class="mt-auto">
+                        <a href="contact.html" @click="mobileMenuOpen = false"
+                            class="block w-full text-center bg-[#67B32C] text-white py-5 rounded-2xl font-black text-xl shadow-lg">
+                            Nous contacter
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </header>
+
+
+    <section class="relative h-[350px] w-full flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="src/assets/images/img12.png" alt="Vue de Bopa" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/40 backdrop-blur-[1px]"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-6 max-w-4xl">
+            <h2
+                class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight leading-tight opacity-0 animate-[fadeIn_1s_ease-out_forwards]">
+                Découvrir Bopa
+            </h2>
+
+            <p class="text-white text-lg md:text-xl mb-10 opacity-0 animate-[fadeIn_1s_ease-out_0.3s_forwards]">
+                Au cœur du sud du Bénin, Bopa vous invite à découvrir une terre de traditions vivantes, de spiritualité
+                et d’hospitalité, où l’histoire se transmet et se partage. </p>
+
+            <div class="opacity-0 animate-[fadeInUp_0.8s_ease-out_0.6s_forwards]">
+                <a href="contact.html" class="group relative inline-block overflow-hidden bg-[#67B32C] text-white px-12 py-4 text-xl font-bold
+                      rounded-tl-[40px] rounded-tr-[80px] rounded-br-[80px] rounded-bl-none
+                      hover:bg-[#589b25] transition-all duration-500 shadow-xl transform hover:scale-105">
+
+                    <span class="relative z-10">Nous contacter</span>
+
+                    <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent 
+                            -translate-x-full group-hover:translate-x-full transition-transform duration-1000">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white overflow-hidden">
+        <div class="w-full">
+            <div class="max-w-5xl mx-auto px-6 text-center space-y-6 mb-12">
+                <h2 class="text-4xl md:text-5xl font-black text-gray-900 tracking-tight  ">
+                    Bopa terre de tradition
+                </h2>
+
+                <div class="flex justify-center items-center h-1.5 w-40 mx-auto">
+                    <div class="h-full w-1/2 bg-[#3277BC] rounded-l-full"></div>
+                    <div class="h-full w-1/2 bg-[#67B32C] rounded-r-full"></div>
+                </div>
+
+                <p
+                    class="text-gray-700 text-lg md:text-xl leading-relaxed max-w-4xl mx-auto font-medium opacity-0 animate-[fadeIn_1s_ease-out_0.6s_forwards]">
+                    Bopa est un territoire façonné par la sagesse des anciens, la transmission des valeurs et le respect
+                    des coutumes.
+                    Les traditions y rythment la vie communautaire et participent à la cohésion sociale et à l'identité
+                    du Royaume.
+                </p>
+            </div>
+
+            <div class="relative group w-full px-0 md:px-10">
+                <div class="relative overflow-hidden rounded-none md:rounded-[60px] ">
+                    <img src="src/assets/images/img14.png" alt="Cérémonie traditionnelle Bopa"
+                        class="w-full h-[350px] md:h-[450px] object-cover object-center transform transition-transform duration-1000 group-hover:scale-110">
+
+                    <div
+                        class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20 pointer-events-none">
+                    </div>
+
+                    <div
+                        class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="py-20 bg-gray-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+
+                <div class="w-full lg:w-1/2 space-y-6">
+                    <div class="space-y-2">
+                        <h2 class="text-4xl md:text-5xl font-black text-gray-900 tracking-tight">
+                            Lac Ahémé
+                        </h2>
+                        <div class="flex h-1.5 w-32">
+                            <div class="h-full w-1/2 bg-[#3277BC] rounded-l-full"></div>
+                            <div class="h-full w-1/2 bg-[#67B32C] rounded-r-full"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 text-gray-700">
+                        <p class="text-xl md:text-2xl font-semibold leading-snug text-gray-800">
+                            Véritable poumon naturel de la région, le Lac Ahémé offre des paysages apaisants et une
+                            richesse culturelle unique.
+                        </p>
+                        <p class="text-lg leading-relaxed opacity-90">
+                            Il constitue un lieu de vie, de traditions et d'activités essentielles pour les communautés
+                            locales, notamment à travers la pêche artisanale qui forge l'identité de Bopa.
+                        </p>
+                    </div>
+
+
+                </div>
+
+                <div class="w-full lg:w-1/2 relative">
+                    <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-[#67B32C]/5 rounded-full blur-3xl"></div>
+
+                    <div class="relative group">
+                        <div class="overflow-hidden rounded-[50px]  ">
+                            <img src="src/assets/images/img 9.png" alt="Pêcheur sur le Lac Ahémé"
+                                class="w-full h-[400px] object-cover transition-transform duration-[2s] group-hover:scale-110">
+
+                            <div
+                                class="absolute bottom-6 left-6 bg-white/90 backdrop-blur-md px-5 py-2 rounded-2xl shadow-sm border border-white/20">
+                                <span class="text-[#3277BC] font-bold text-sm">Pêche traditionnelle</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="relative h-[350px] w-full flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="src/assets/images/img13.png" alt="Vue de Bopa" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/40 backdrop-blur-[1px]"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-6 max-w-4xl">
+            <h2
+                class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight leading-tight opacity-0 animate-[fadeIn_1s_ease-out_forwards]">
+                Vivez l’expérience Bopa
+
+            </h2>
+
+            <p class="text-white text-lg md:text-xl mb-10 opacity-0 animate-[fadeIn_1s_ease-out_0.3s_forwards]">
+                À la rencontre d’un héritage vivant, entre culture, nature et hospitalité
+            </p>
+
+            <div class="opacity-0 animate-[fadeInUp_0.8s_ease-out_0.6s_forwards]">
+                <a href="contact.html" class="group relative inline-block overflow-hidden bg-[#67B32C] text-white px-12 py-4 text-xl font-bold
+                      rounded-tl-[40px] rounded-tr-[80px] rounded-br-[80px] rounded-bl-none
+                      hover:bg-[#589b25] transition-all duration-500 shadow-xl transform hover:scale-105">
+
+                    <span class="relative z-10">Préparer ma visite</span>
+
+                    <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent 
+                            -translate-x-full group-hover:translate-x-full transition-transform duration-1000">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#3277BC] text-white py-10">
+        <div class="max-w-[1440px] mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="space-y-4">
+                    <div class="bg-white p-2 rounded-xl inline-block shadow-lg animate-[fadeIn_0.8s_ease-out]">
+                        <img src="src/assets/images/logo.png" alt="Logo UNIR-FORMER-ELEVER"
+                            class="h-16 w-16 object-contain">
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-lg font-bold tracking-wider uppercase">UNIR-FORMER-ELEVER</h3>
+                        <p class="text-blue-100 leading-snug max-w-xs text-sm">
+                            Une autorité morale au service des communautés et de la dignité humaine.
+                        </p>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Liens rapides</h4>
+                    <ul class="space-y-2 text-base">
+                        <li><a href="index.html"
+                                class="hover:translate-x-2 inline-block transition-transform duration-300 text-blue-50 hover:text-white">Accueil</a>
+                        </li>
+                        <li><a href="a-propos.html"
+                                class="hover:translate-x-2 inline-block transition-transform duration-300 text-blue-50 hover:text-white">À
+                                propos</a></li>
+                        <li><a href="tourisme.html"
+                                class="hover:translate-x-2 inline-block transition-transform duration-300 text-blue-50 hover:text-white">Tourisme
+                                à Bopa</a></li>
+                        <li><a href="nos-actions.html"
+                                class="hover:translate-x-2 inline-block transition-transform duration-300 text-blue-50 hover:text-white">Nos
+                                actions</a></li>
+                        <li><a href="contact.html"
+                                class="hover:translate-x-2 inline-block transition-transform duration-300 text-blue-50 hover:text-white">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Confidentialité</h4>
+                    <ul class="space-y-2 text-base">
+                        <li><a href="#"
+                                class="hover:translate-x-2 inline-block transition-transform duration-300 text-blue-50 hover:text-white">Politique
+                                de confidentialité</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="text-xl font-bold mb-3">Contact</h4>
+                        <p class="text-blue-50 text-base">Bopa, Bénin</p>
+                    </div>
+
+                    <div class="pt-2">
+                        <a href="dons.html" class="group relative inline-block bg-[#67B32C] text-white text-lg font-bold py-3 px-6 
+                            rounded-tl-[30px] rounded-br-[30px] rounded-tr-[10px] rounded-bl-[10px]
+                            hover:bg-[#569625] transition-all duration-300 shadow-xl hover:-translate-y-1">
+                            <span class="relative z-10">Faire un don</span>
+                            <div
+                                class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-[inherit]">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-10 pt-6 border-t border-white/10 text-center text-blue-100/50 text-xs">
+                <p>&copy; 2026 UNIR-FORMER-ELEVER. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,181 @@
+/* Importation de la police Nunito via Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+/* --- CONFIGURATION GLOBALE --- */
+
+html, body {
+    overflow-x: hidden; /* Empêche le défilement horizontal indésirable */
+    width: 100%;        /* Force la largeur à 100% de l'écran */
+}
+
+body.aos-animate {
+    overflow-x: hidden !important; /* Sécurité supplémentaire pour les animations AOS */
+}
+
+/* Application de la police Nunito à tout le texte */
+body, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* --- ANIMATIONS DE BASE --- */
+
+/* Apparition simple avec léger mouvement vers le haut */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Animation d'entrée pour les cartes (zoom + montée) */
+@keyframes cardEntry {
+  from { opacity: 0; transform: translateY(30px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.animate-card {
+  animation: cardEntry 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* --- ANIMATIONS SPÉCIFIQUES (HERO & TEXTE) --- */
+
+/* Effet de révélation avec lueur (Glow) pour le titre principal */
+@keyframes revealAndGlow {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    filter: blur(5px);
+    text-shadow: 0 0 0px rgba(255, 255, 255, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.02);
+    filter: blur(0px);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+  }
+}
+
+.animate-king-reveal {
+  opacity: 0;
+  animation: revealAndGlow 1s ease-out forwards;
+}
+
+/* Animation de montée classique */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Effet de flottement continu (Lévitation) */
+@keyframes float {
+  0% { transform: translateY(2px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(2px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* --- DÉLAIS D'ANIMATION (STAGGER) --- */
+
+/* Délais pour les mots ou petites cartes */
+.delay-word-1 { animation-delay: 0.2s; }
+.delay-word-2 { animation-delay: 0.6s; }
+.delay-word-3 { animation-delay: 1.0s; }
+
+/* Délais pour les grandes cartes ou sections */
+.delay-card-1, .delay-1 { animation-delay: 0.1s; }
+.delay-card-2, .delay-2 { animation-delay: 0.3s; }
+.delay-card-3 { animation-delay: 0.5s; }
+
+/* --- COMPOSANTS INTERACTIFS (NAV & CARTES ACTIONS) --- */
+
+/* État actif du menu de navigation (soulignement persistant) */
+.nav-active span:last-child {
+    width: 100% !important;
+    left: 0 !important;
+}
+
+/* Section "Nos Actions" : Cartes avec effet de survol (Hover) */
+.action-card {
+    height: 280px;      /* Hauteur compacte contrôlée */
+    position: relative; /* Nécessaire pour l'overlay absolu */
+    overflow: hidden;   /* Coupe tout ce qui dépasse (image zoomée) */
+}
+
+/* Conteneur de la carte */
+.action-card {
+    position: relative;
+    height: 280px;
+    overflow: hidden;
+    border-radius: 25px;
+}
+
+/* L'image de fond */
+.action-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Correction de object-cover */
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Overlay : Il occupe tout l'espace mais est transparent par défaut */
+.action-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Aligne le texte en bas */
+    padding: 2rem;
+    
+    /* Dégradé bleu : on part d'un bleu opaque en bas vers transparent */
+    background: linear-gradient(to top, #0f76d6 0%, rgba(71, 78, 85, 0.8) 50%, rgba(14, 14, 14, 0) 100%);
+    
+    /* CACHE l'overlay par défaut */
+    opacity: 0;
+    transform: translateY(20px); /* Petit mouvement de montée au hover */
+    transition: all 0.5s ease-in-out;
+    z-index: 10;
+}
+
+/* --- EFFETS AU SURVOL (HOVER) --- */
+
+.action-card:hover img {
+    transform: scale(1.1); /* Zoom de l'image */
+}
+
+.action-card:hover .action-overlay {
+    opacity: 1;           /* Révèle l'overlay bleu */
+    transform: translateY(0); /* Le texte remonte à sa position initiale */
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
